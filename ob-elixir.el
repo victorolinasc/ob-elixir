@@ -39,23 +39,50 @@
 
 (defun org-babel-execute:elixir (body params)
   (let* ((src-file "orgmode_elixir_src.exs")
-	 (full-body (org-babel-expand-body:generic body params))
-	 (results
-	  (progn (with-temp-file src-file (insert full-body))
-		 (org-babel-eval
-		  (concat "elixir" " " src-file) ""))))
-    
+         (vars (org-babel-variable-assignments:elixir params))
+	 (full-body (org-babel-expand-body:generic body params vars))
+	 (results (progn (with-temp-file src-file (insert full-body))
+                         (org-babel-eval
+                          (concat "elixir" " " src-file) ""))))
     (org-babel-reassemble-table
-       (org-babel-result-cond (cdr (assoc :result-params params))
-	 (org-babel-read results)
-         (let ((tmp-file (org-babel-temp-file "c-")))
-           (with-temp-file tmp-file (insert results))
-           (org-babel-import-elisp-from-file tmp-file)))
+       (org-babel-elixir-table-or-string results)
        (org-babel-pick-name
         (cdr (assoc :colname-names params)) (cdr (assoc :colnames params)))
        (org-babel-pick-name
         (cdr (assoc :rowname-names params)) (cdr (assoc :rownames params))))))
 
-(provide 'ob-elixir)
+;; Helpers, borrowed liberally from `ob-python'
 
+(defun org-babel-variable-assignments:elixir (params)
+  "Return a list of Elixir statements assigning the block's variables."
+  (mapcar
+   (lambda (pair)
+     (format "%s = %s"
+	     (car pair)
+	     (org-babel-elixir-var-to-elixir (cdr pair))))
+   (mapcar #'cdr (org-babel-get-header params :var))))
+
+(defun org-babel-elixir-var-to-elixir (var)
+  "Convert an elisp value to an Elixir variable.
+Convert an elisp value, VAR, into a string of Elixir source code
+specifying a variable of the same value."
+  (if (listp var)
+      (concat "[" (mapconcat #'org-babel-elixir-var-to-elixir var ", ") "]")
+    (if (equal var 'hline)
+	"nil"  ; replace with variable?
+      (format
+       (if (and (stringp var) (string-match "[\n\r]" var)) "\"\"%S\"\"" "%S")
+       (if (stringp var) (substring-no-properties var) var)))))
+
+(defun org-babel-elixir-table-or-string (results)
+  "Convert RESULTS into an appropriate elisp value."
+  (org-babel-script-escape (org-babel-elixir-trim-string results)))
+
+(defun org-babel-elixir-trim-string (string)
+  "Remove white spaces in beginning and ending of STRING.
+White space here is any of: space, tab, Emacs newline (line feed, ASCII 10)."
+  (replace-regexp-in-string "\\`[ \t\n]*" ""
+                            (replace-regexp-in-string "[ \t\n]*\\'" "" string)))
+
+(provide 'ob-elixir)
 ;;; ob-elixir.el ends here

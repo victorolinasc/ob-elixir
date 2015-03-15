@@ -7,9 +7,9 @@ This is a simple implementation of Elixir support for code blocks in org-mode.
 
 This is only tested on Emacs 24. You must have installed:
 
-- [Erlang](http://www.erlang.org/) (check [here](https://www.erlang-solutions.com/downloads/download-erlang-otp))
-- [Elixir](http://elixir-lang.org/) (chech [here](http://elixir-lang.org/install.html))
-- elixir-mode (check [here](https://github.com/elixir-lang/emacs-elixir))
+- [[http://www.erlang.org/][Erlang]] (check [[https://www.erlang-solutions.com/downloads/download-erlang-otp][here]])
+- [[http://elixir-lang.org/][Elixir]] (check [[http://elixir-lang.org/install.html][here]])
+- elixir-mode (check [[https://github.com/elixir-lang/emacs-elixir][here]])
 
 * Usage
 

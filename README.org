@@ -17,13 +17,23 @@ This is only tested on Emacs 24. You must have installed:
 
 * Usage
 
-Add ob-elixir.el to your load path. Example:
+Clone repository and put ob-elixir.el in your Emacs load path.
+
+1. Clone:
+
+#+BEGIN_SRC sh
+git clone https://github.com/victorolinasc/ob-elixir.git
+#+END_SRC
+
+2. Add ob-elixir.el to your load path. Example:
 
 #+BEGIN_SRC elisp
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 #+END_SRC
 
-Then you need to configure babel support in org-mode. Add this to your configuration:
+Then copy file ob-elixir.el to "~/.emacs.d/lisp"
+
+3. Then you need to configure babel support in org-mode. Add this to your configuration:
 
 #+BEGIN_SRC elisp
   (require 'ob-elixir)
@@ -46,4 +56,4 @@ Then source code blocks can be interpreted in org-mode.
 - Avoid having to call IO.inspect to return a value.
 - Parsing reader values
 - Optionally cleanup .exs file
-
+- Publish to MELPA, MARMELADE?

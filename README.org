@@ -19,13 +19,14 @@ This is only tested on Emacs 24. You must have installed:
 
 Clone repository and put ob-elixir.el in your Emacs load path.
 
-1. Clone:
+** Clone:
 
 #+BEGIN_SRC sh
 git clone https://github.com/victorolinasc/ob-elixir.git
 #+END_SRC
 
-2. Add ob-elixir.el to your load path. Example:
+** Put in path
+Add ob-elixir.el to your load path. Example:
 
 #+BEGIN_SRC elisp
 (add-to-list 'load-path "~/.emacs.d/lisp/")
@@ -33,7 +34,9 @@ git clone https://github.com/victorolinasc/ob-elixir.git
 
 Then copy file ob-elixir.el to "~/.emacs.d/lisp"
 
-3. Then you need to configure babel support in org-mode. Add this to your configuration:
+** Configure Babel
+
+Then you need to configure babel support in org-mode. Add this to your configuration:
 
 #+BEGIN_SRC elisp
   (require 'ob-elixir)

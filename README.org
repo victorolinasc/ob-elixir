@@ -3,6 +3,10 @@ Org-Mode Elixir language support
 
 This is a simple implementation of Elixir support for code blocks in org-mode.
 
+* Org-Babel
+
+Babel provides what is known as literate programming to org-mode. The documentation is broad and can be found [[http://orgmode.org/org.html#Working-With-Source-Code][here]].
+
 * Requirements
 
 This is only tested on Emacs 24. You must have installed:
@@ -35,3 +39,11 @@ Then you need to configure babel support in org-mode. Add this to your configura
 #+END_SRC
 
 Then source code blocks can be interpreted in org-mode.
+
+* Future work
+
+- Persistent sessions -- could be backed by emacs comint or distel style distributed erlang.
+- Avoid having to call IO.inspect to return a value.
+- Parsing reader values
+- Optionally cleanup .exs file
+

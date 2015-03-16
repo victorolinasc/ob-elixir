@@ -45,11 +45,11 @@
                          (org-babel-eval
                           (concat "elixir" " " src-file) ""))))
     (org-babel-reassemble-table
-       (org-babel-elixir-table-or-string results)
-       (org-babel-pick-name
-        (cdr (assoc :colname-names params)) (cdr (assoc :colnames params)))
-       (org-babel-pick-name
-        (cdr (assoc :rowname-names params)) (cdr (assoc :rownames params))))))
+     (org-babel-elixir-table-or-string results)
+     (org-babel-pick-name
+      (cdr (assoc :colname-names params)) (cdr (assoc :colnames params)))
+     (org-babel-pick-name
+      (cdr (assoc :rowname-names params)) (cdr (assoc :rownames params))))))
 
 ;; Helpers, borrowed liberally from `ob-python'
 

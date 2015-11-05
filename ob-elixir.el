@@ -60,7 +60,10 @@
      (format "%s = %s"
 	     (car pair)
 	     (org-babel-elixir-var-to-elixir (cdr pair))))
-   (mapcar #'cdr (org-babel-get-header params :var))))
+   (unless 'org-babel--get-vars
+     ;; For backwards compatibility
+     (mapcar #'cdr (org-babel-get-header params :var))
+     (org-babel--get-vars params))))
 
 (defun org-babel-elixir-var-to-elixir (var)
   "Convert an elisp value to an Elixir variable.
